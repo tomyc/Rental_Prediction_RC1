@@ -9,11 +9,14 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from revoscalepy.computecontext.RxInSqlServer import RxInSqlServer
 from revoscalepy.computecontext.RxInSqlServer import RxDataSource
-from revoscalepy.etl.RxImport import rx_import_datasource
+#from revoscalepy.etl.RxImport import rx_import_datasource #co jest z importem? brak metody w klasie - wer. 9.2.0
+from revoscalepy.etl.RxImport import rx_import #zmiana nazwy i definicji metordy: rx_import_datasource -> rx_import 
 
 #Connection string to connect to SQL Server named instance
-sql_server = os.getenv('RTEST_SQL_SERVER', '.')
-conn_str = 'Driver=SQL Server;Server=' + sql_server + ';Database=TutorialDB;Trusted_Connection=True;'
+#sql_server = os.getenv('RTEST_SQL_SERVER', '.')
+#conn_str = 'Driver=SQL Server;Server=' + sql_server + ';Database=TutorialDB;Trusted_Connection=True;'
+conn_str = "Driver=SQL Server;Server=BIR;Database=TutorialDB;Trusted_Connection=True"
+
 
 
 #Define the columns we wish to import
@@ -37,18 +40,21 @@ column_info = {
      }
 
 #Get the data from SQL Server Table
-data_source = RxSqlServerData(table="dbo.rental_data", connectionString=conn_str, colInfo=column_info)
+#data_source = RxSqlServerData(table="dbo.rental_data", connectionString=conn_str, colInfo=column_info)
+data_source = RxSqlServerData(table="dbo.rental_data", connection_string=conn_str, column_info=column_info) #9.2.0 zmiana connectionString->connection_string; colInfo->column_info
 computeContext = RxInSqlServer(
-     connectionString = conn_str,
-     numTasks = 1,
-     autoCleanup = False
-)
+     connection_string = conn_str,
+     num_tasks = 1,
+     auto_cleanup = False
+) #zmiana w 9.2.0 connectionString -> connection_string; numTasks->num_tasks; autoCleanup-> auto_cleanup
 
 
-RxInSqlServer(connectionString=conn_str, numTasks=1, autoCleanup=False)
+#RxInSqlServer(connectionString=conn_str, numTasks=1, autoCleanup=False)
+RxInSqlServer(connection_string=conn_str, num_tasks=1, auto_cleanup=False) #zmiana w 9.2.0 connectionString -> connection_string; numTasks->num_tasks; autoCleanup-> auto_cleanup
 
 # import data source and convert to pandas dataframe
-df = pd.DataFrame(rx_import_datasource(data_source))
+#df = pd.DataFrame(rx_import_datasource(data_source))
+df = pd.DataFrame(rx_import(data_source)) #9.2.0 zmiana rx_import_datasource->rx_import
 print("Data frame:", df)
 # Get all the columns from the dataframe.
 columns = df.columns.tolist()
