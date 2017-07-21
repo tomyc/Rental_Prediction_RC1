@@ -9,13 +9,11 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from revoscalepy.computecontext.RxInSqlServer import RxInSqlServer
 from revoscalepy.computecontext.RxInSqlServer import RxDataSource
-#from revoscalepy.etl.RxImport import rx_import_datasource #co jest z importem? brak metody w klasie - wer. 9.2.0
-from revoscalepy.etl.RxImport import rx_import #zmiana nazwy i definicji metordy: rx_import_datasource -> rx_import 
+from revoscalepy.etl.RxImport import rx_import #zmiana nazwy i definicji metordy 9.1.0 -> 9.2.0: rx_import_datasource -> rx_import 
 
 #Connection string to connect to SQL Server named instance
 sql_server = os.getenv('RTEST_SQL_SERVER', '.')
 conn_str = 'Driver=SQL Server;Server=' + sql_server + ';Database=TutorialDB;Trusted_Connection=True;'
-#conn_str = "Driver=SQL Server;Server=BIR;Database=TutorialDB;Trusted_Connection=True"
 
 
 
