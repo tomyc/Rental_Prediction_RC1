@@ -14,8 +14,8 @@ from revoscalepy.etl.RxImport import rx_import #zmiana nazwy i definicji metordy
 
 #Connection string to connect to SQL Server named instance
 #sql_server = os.getenv('RTEST_SQL_SERVER', '.')
-#conn_str = 'Driver=SQL Server;Server=' + sql_server + ';Database=TutorialDB;Trusted_Connection=True;'
-conn_str = "Driver=SQL Server;Server=BIR;Database=TutorialDB;Trusted_Connection=True"
+conn_str = 'Driver=SQL Server;Server=' + sql_server + ';Database=TutorialDB;Trusted_Connection=True;'
+#conn_str = "Driver=SQL Server;Server=BIR;Database=TutorialDB;Trusted_Connection=True"
 
 
 
