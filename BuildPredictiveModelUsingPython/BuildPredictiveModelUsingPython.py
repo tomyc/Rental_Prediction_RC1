@@ -46,18 +46,14 @@ DATA_SOURCE = RxSqlServerData(table="dbo.rental_data",
                               connection_string=CONN_STR,
                               column_info=COLUMN_INFO)
 
-#zmiana w 9.2.0 connectionString -> connection_string;
+#zmiana w 9.2.0
+#connectionString -> connection_string;
 #numTasks->num_tasks; autoCleanup-> auto_cleanup
 COMPUTE_CONTEXT = RxInSqlServer(
     connection_string=CONN_STR,
     num_tasks=1,
     auto_cleanup=False
 )
-
-#RxInSqlServer(connectionString=conn_str, numTasks=1, autoCleanup=False)
-#zmiana w 9.2.0
-#connectionString -> connection_string; numTasks->num_tasks; autoCleanup-> auto_cleanup
-RxInSqlServer(connection_string=CONN_STR, num_tasks=1, auto_cleanup=False)
 
 # import data source and convert to pandas dataframe
 #df = pd.DataFrame(rx_import_datasource(data_source))
